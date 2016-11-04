@@ -1,7 +1,6 @@
 # Randsum
-[![Code Climate](https://codeclimate.com/github/alxjrvs/Randsum/badges/gpa.svg)](https://codeclimate.com/github/alxjrvs/Randsum)
-[![Build Status](https://travis-ci.org/alxjrvs/Randsum.svg?branch=master)](https://travis-ci.org/alxjrvs/Randsum)
-[![Test Coverage](https://codeclimate.com/github/alxjrvs/Randsum/badges/coverage.svg)](https://codeclimate.com/github/alxjrvs/Randsum/coverage)
+### IMPORTANT RECTANGLES
+[![Build Status](https://travis-ci.org/RANDSUM/randsum.svg?branch=master)](https://travis-ci.org/RANDSUM/randsum)[![Code Climate](https://codeclimate.com/github/RANDSUM/randsum/badges/gpa.svg)](https://codeclimate.com/github/RANDSUM/randsum) [![Test Coverage](https://codeclimate.com/github/RANDSUM/randsum/badges/coverage.svg)](https://codeclimate.com/github/RANDSUM/randsum/coverage) [![Issue Count](https://codeclimate.com/github/RANDSUM/randsum/badges/issue_count.svg)](https://codeclimate.com/github/RANDSUM/randsum)
 
 Randsum is a gem that simulates rolling dice.
 
