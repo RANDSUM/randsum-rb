@@ -123,10 +123,16 @@ describe Randsum::RollReport do
     end
   end
 
+  describe "#sides" do
+    it 'returns the correct number of sides' do
+      expect(report.sides).to eq sides
+    end
+  end
+
   describe "#die" do
     it 'returns a die object with the correct sides' do
       expect(report.die).to be_a Randsum::Die
-      expect(report.die.sides).to eq 6
+      expect(report.die.sides).to eq sides
     end
   end
 end
