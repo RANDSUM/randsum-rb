@@ -1,4 +1,5 @@
 require "randsum/version"
+require "randsum/metadata"
 require "randsum/filters/filter"
 require "randsum/filters/droppers/dropper"
 require "randsum/filters/droppers/high_dropper"
