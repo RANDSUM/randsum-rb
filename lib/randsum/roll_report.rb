@@ -57,5 +57,5 @@ module Randsum
 
     private
     attr_reader :roll
-    end
+  end
 end
