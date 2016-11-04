@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Randsum::VERSION
   spec.authors       = ["Alex Jarvis"]
   spec.email         = ["alxjrvs@gmail.com"]
-  spec.summary       = %q{Random Numbers, With Style.}
-  spec.description   = %q{Randsum is a Gem that provides a more familiar interface for generating random numbers - Rolling Dice. Using Randsum, developers can generate psuedorandom numbers securely and succinctly.}
-  spec.homepage      = "http://www.github.com/alxjrvs/randsum"
-  spec.license       = "MIT"
+  spec.summary       = Randsum::SUMMARY
+  spec.description   = Randsum::DESCRIPTION
+  spec.homepage      = Randsum::HOMEPAGE
+  spec.license       = Randsum::LICENSE
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
