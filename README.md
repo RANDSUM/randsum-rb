@@ -1,8 +1,8 @@
 # Randsum
-### IMPORTANT RECTANGLES
-[![Build Status](https://travis-ci.org/RANDSUM/randsum.svg?branch=master)](https://travis-ci.org/RANDSUM/randsum)[![Code Climate](https://codeclimate.com/github/RANDSUM/randsum/badges/gpa.svg)](https://codeclimate.com/github/RANDSUM/randsum) [![Test Coverage](https://codeclimate.com/github/RANDSUM/randsum/badges/coverage.svg)](https://codeclimate.com/github/RANDSUM/randsum/coverage) [![Issue Count](https://codeclimate.com/github/RANDSUM/randsum/badges/issue_count.svg)](https://codeclimate.com/github/RANDSUM/randsum)
 
-Randsum is a gem that simulates rolling dice.
+[![Build Status](https://travis-ci.org/RANDSUM/randsum.svg?branch=master)](https://travis-ci.org/RANDSUM/randsum)[![Code Climate](https://codeclimate.com/github/RANDSUM/randsum/badges/gpa.svg)](https://codeclimate.com/github/RANDSUM/randsum) [![Test Coverage](https://codeclimate.com/github/RANDSUM/randsum/badges/coverage.svg)](https://codeclimate.com/github/RANDSUM/randsum/coverage) [![Issue Count](https://codeclimate.com/github/RANDSUM/randsum/badges/issue_count.svg)](https://codeclimate.com/github/RANDSUM/randsum)
+all hail the rectangles
+## Finally, a way to roll specific quantities of particular sides of dice.
 
 ## Installation
 
@@ -31,130 +31,139 @@ $ irb
 
 ### The `Die` Class
 
-`Randsum` lets you make `Die`, and these `die` can have any number of sides.
+`Randsum` lets you make `Die`, which sounds like an existential baby stringing together its first downer of a sentence.
+
+A `Die` represents something more commonly referred to in the plural - Dice. Each `Die` takes an argument in its initializer, representing the number of sides of the die you want to make.
 
 ```
 > d6 = Randsum::Die.new(6)
 ```
 
-When you roll a `Die`, you get a `RollReport`.
+Once you've created this new random number object, you can use `.roll` to generate a random number from 1 to the size of the die.
 
 ```
 > d6.roll
-#=> <Randsum::RollReport #hash total: 3, rolls: [3], number_of_dice: 1, die_sides: 6>
+#=> You rolled 1 d6, and got a 5. (Rolls: [5])
+```
+
+...aw, go ahead. Roll it a few more times. I won't blame you.
+
+```
 > d6.roll
-#=> <Randsum::RollReport #hash total: 6, rolls: [6], number_of_dice: 1, die_sides: 6>
+#=> You rolled 1 d6, and got a 6. (Rolls: [6])
+
+> d6.roll
+#=> You rolled 1 d6, and got a 3. (Rolls: [3])
 ```
 
-You can roll multiple dice of the same kind by passing a number to the `roll` argument.
+That's pretty neat, right?
+
+`Randsum` comes pre-packaged with several shortcuts for popular Die sizes:
 
 ```
-> d6.roll(number: 3)
-#=> <Randsum::RollReport #hash total: 9, rolls: [3, 5, 1], number_of_dice: 3, die_sides: 6>
+#D20
+> Randsum::D20.roll
+#=> You rolled 1 d20, and got a 20. (Rolls: [20])
+
+#D12
+> Randsum::D12.roll
+#=> You rolled 1 d12, and got a 2. (Rolls: [2])
+
+#D2-6, D8, and D10!
 ```
 
-### `RollReport`s
+### Rolling Multiple Dice
+
+`Die#roll` also takes an optional argument that represents how many bones you want to roll. Check it:
+
 ```
-> result = d6.roll(number: 3)
-#=> <Randsum::RollReport #hash total: 14, rolls: [2, 6, 6], number_of_dice: 3, die_sides: 6>
+> Randsum::D6.roll(2)
+#=> You rolled 2 d6, and got a 2. (Rolls: [1, 1])
 ```
 
-The `RollReport` has few helpful things to report about your roll.
+Snakeyes. Rough.
+
+
+### Making use of the rolls: the `RollReport`
+
+`Die#roll` returns a `RollReport` object, which can teach you a lot about your rolls (but not, tragically, how to roll better.)
+
+```
+> report = Randsum::D20.roll 5
+#=> You rolled 5 d20, and got a 61. (Rolls: [20, 16, 9, 14, 1])
+```
 
 The `#total` method represents the sum total of the dice that were rolled:
 
 ```
-> result.total
-#=> 14
+> report.total
+#=> 61
 ```
 
 The `#rolls` array, which reports the individual results of any dice rolled:
 
 ```
-> result.rolls
-#=> [2, 6, 6]
+> report.rolls
+#=> [20, 17, 9, 14,1]
 ```
 
-`#number_of_dice` tells you how many dice were rolled this time:
+`#quantity` tells you how many dice were rolled this time:
 
 ```
-result.number_of_dice
-#=> 3
+> report.quantity
+#=> 5
 ```
 
-`#die_sides` reports the number of sides on the dice rolled in this result:
+`#sides` reports the number of sides on the dice rolled in this result:
 
 ```
-result.die_sides
-#=> 6
+> report.sides
+#=> 20
+```
+
+And if you don't like that roll (hey we get it) you can use `#die` to get another of the same die to roll again!
+
+```
+> report.die.roll
+#=> You rolled 1 D20, and got 17. (Rolls: [17])
 ```
 
 #### Manipulating `RollReport`s
 
-Roll results can be further manipulated after their original creation. To facilitate popular use-cases for Dice rolling, `RollReport`s also include public `#drop_lowest` and `#drop_highest` methods.
+Roll results can be further manipulated after their original creation. To facilitate popular use-cases for Dice rolling, `RollReport`s also include public `#drop_lowest` and `#drop_highest`, and `#drop` methods.
 
 `#drop_lowest` returns a new `RollReport` without the lowest numerical die roll.
 
 ```
-> result = d6.roll(number: 4)
-#=> <Randsum::RollReport #hash total: 14, rolls: [3, 1, 4, 6], number_of_dice: 4, die_sides: 6>
+> report = Randsum::D6.roll 4
+#=> You rolled 4 d6, and got 11. (Rolls: [3, 2, 2, 4])
 
-> result.rolls
-#=> [3, 1, 4, 6]
-
-> result.total
-#=> 14
-
-> new_result = result.drop_lowest
-#=> <Randsum::RollReport #hash total: 13, rolls: [3, 4, 6], number_of_dice: 3, die_sides: 6>
-
-> new_result.rolls
-#=> [3, 4, 6]
-
-> new_result.total
-#=> 13
+> new_report = report.drop_lowest
+#=>  You rolled 3 d6, and got 9. (Rolls: [4, 3, 2])
 ```
 
 Similarly, `#drop_highest` will remove the highest number in the `rolls` array.
 
 ```
-> new_result = result.drop_highest
-#=> <Randsum::RollReport #hash total: 8, rolls: [3, 1, 4], number_of_dice: 3, die_sides: 6>
-
-> new_result.rolls
-#=> [3, 1, 4]
-
-> new_result.total
-#=> 8
+> new_result = report.drop_highest
+#=> You rolled 3 d6, and got 7. (Rolls: [2, 2, 3])
 ```
 
 Both `#drop_lowest` and `#drop_highest` can also take an optional integer argument.
 
 ```
-> new_result = result.drop_highest(2)
-
-> new_result.rolls
-#=> [3, 1]
-
-> new_result.total
-#=> 4
+> result.drop_highest(2)
+#=> You rolled 2 d6, and got 4. (Rolls: [2, 2])
 ```
 
-### Dice Constants
+### WHY IS THIS SO COMPLICATED
 
-Randsum comes pre-packaged with several shortcuts for popular Die sizes:
+`Die#simple_roll` will just give you a random number, but where's the fun in that?
 
-```
-#D20
-> result = Randsum::D20.roll
-#=> <Randsum::RollReport #hash total: 18, rolls: [18], number_of_dice: 1, die_sides: 20>
+### Why build this?
+[Rollr](http://github.com/alxjrvs/rollr) was one of the first things I ever built. I think it's funny, and I'm not sure why.
 
-#D12
-> result = Randsum::D12.roll
-#=> <Randsum::RollReport #hash total: 6, rolls: [6], number_of_dice: 1, die_sides: 12>
-
-#D2-6, D8, and D10!
-```
+I recently had the privilege of attending Sandi Metz' POODNyc workshop, which involved a continual practice of refactoring the same "simple" problem over and over again.  I liked revisitng Rollr through the years, and Randsum reflects an attempt to use small refactoring techniques to continue to mull over the "simple" problem of random numbers.
 
 ## Development
 
