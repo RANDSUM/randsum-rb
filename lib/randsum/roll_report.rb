@@ -5,6 +5,14 @@ module Randsum
       @roll = roll
     end
 
+    def inspect
+      to_s
+    end
+
+    def to_s
+      "You rolled #{quantity} #{die}, and got #{total}. (#{roll})"
+    end
+
     def to_i
       total
     end
@@ -49,5 +57,5 @@ module Randsum
 
     private
     attr_reader :roll
-  end
+    end
 end

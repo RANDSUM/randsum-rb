@@ -9,6 +9,10 @@ module Randsum
       @result = result || roll!
     end
 
+    def to_s
+      "Rolls: #{result}"
+    end
+
     def drop(quantity:,extremity:)
       return new_roll_with(
       result: Dropper.dropper_for(
@@ -20,7 +24,7 @@ module Randsum
     end
 
     private
-    def new_roll_with(result:)
+    def new_roll_with(result: nil)
       return Roll.new(
         die: die,
         quantity: quantity,

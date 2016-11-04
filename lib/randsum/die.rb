@@ -16,6 +16,10 @@ module Randsum
       )
     end
 
+    def to_s
+      "d#{sides}"
+    end
+
     def simple_roll
       randomizer.random_number(sides).to_i + ZERO_INDEX_FIXER
     end

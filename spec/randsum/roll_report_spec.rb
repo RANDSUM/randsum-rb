@@ -5,12 +5,21 @@ describe Randsum::RollReport do
   let(:die)    { Randsum::Die.new(sides) }
   let(:rolls)  { [2, 6, 5] }
   let(:roll)   { Randsum::Roll.new(result: rolls, die: die, quantity: 3) }
+  let(:total)  { rolls.inject(:+) }
 
   let(:report) do
     Randsum::RollReport.new(roll)
   end
 
   let(:total) { rolls.inject(:+) }
+  let(:inspect) {"You rolled #{rolls.count} #{die}, and got #{total}. (#{roll})"}
+
+  describe "inspect" do
+    it "returns the correctly formatted string" do
+      expect("#{report}").to eq inspect
+    end
+
+  end
 
   describe "#to_i" do
     it 'returns the total of the array of dice' do
@@ -20,7 +29,6 @@ describe Randsum::RollReport do
 
   describe "#total" do
     it 'returns the total of the array of dice' do
-      total = rolls.inject(:+)
       expect(report.total).to eq total
     end
   end

@@ -5,6 +5,12 @@ describe Randsum::Die do
 
   let(:desired_result) { quantity * die.sides  }
 
+  describe "to_s" do
+    it "returns a simple desrcription" do
+      expect("#{die}").to eq "d20"
+    end
+  end
+
   describe "#simple_roll" do
     let(:quantity) { 1 }
     let(:roll)   { die.simple_roll }
