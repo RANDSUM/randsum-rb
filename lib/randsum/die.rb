@@ -12,7 +12,7 @@ module Randsum
 
     def roll(quantity = 1)
       Randsum::RollReport.new(
-        roll_for(quantit  y)
+        roll_for(quantity)
       )
     end
 
