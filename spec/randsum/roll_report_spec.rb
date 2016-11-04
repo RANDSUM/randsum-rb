@@ -16,9 +16,14 @@ describe Randsum::RollReport do
 
   describe "inspect" do
     it "returns the correctly formatted string" do
+      expect("#{report.inspect}").to eq inspect
+    end
+  end
+
+  describe "to_s" do
+    it "returns the correctly formatted string" do
       expect("#{report}").to eq inspect
     end
-
   end
 
   describe "#to_i" do
