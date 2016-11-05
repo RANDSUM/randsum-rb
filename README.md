@@ -84,9 +84,9 @@ That's pretty neat, right?
 Snakeyes. Rough.
 
 
-### Making use of the rolls: the `RollReport`
+### Making use of the rolls: the `Roll`
 
-`Die#roll` returns a `RollReport` object, which can teach you a lot about your rolls (but not, tragically, how to roll better.)
+`Die#roll` returns a `Roll` object, which can teach you a lot about your rolls (but not, tragically, how to roll better.)
 
 ```
 > report = Randsum::D20.roll 5
@@ -128,11 +128,11 @@ And if you don't like that roll (hey we get it) you can use `#die` to get anothe
 #=> You rolled 1 D20, and got 17. (Rolls: [17])
 ```
 
-#### Manipulating `RollReport`s
+#### Manipulating `Roll`s
 
-Roll results can be further manipulated after their original creation. To facilitate popular use-cases for Dice rolling, `RollReport`s also include public `#drop_lowest` and `#drop_highest`, and `#drop` methods.
+Roll results can be further manipulated after their original creation. To facilitate popular use-cases for Dice rolling, `Roll`s also include public `#drop_lowest` and `#drop_highest`, and `#drop` methods.
 
-`#drop_lowest` returns a new `RollReport` without the lowest numerical die roll.
+`#drop_lowest` returns a new `Roll` without the lowest numerical die roll.
 
 ```
 > report = Randsum::D6.roll 4
@@ -163,7 +163,7 @@ Both `#drop_lowest` and `#drop_highest` can also take an optional integer argume
 ### Why build this?
 [Rollr](http://github.com/alxjrvs/rollr) was one of the first things I ever built. I think it's funny, and I'm not sure why.
 
-I liked revisitng Rollr through the years, and Randsum reflects my current take on the problem. I renamed it because at a certain point you realize you just typed `Rollr::Roll.new(rolls:).roll!`and you're just dead inside. 
+I liked revisiting Rollr through the years, and Randsum reflects my current take on the problem. I renamed it because at a certain point you realize you just typed `Rollr::Roll.new(rolls:).roll!`and you're just dead inside.
 
 ## Development
 
