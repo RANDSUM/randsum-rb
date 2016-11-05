@@ -163,7 +163,7 @@ Both `#drop_lowest` and `#drop_highest` can also take an optional integer argume
 ### Why build this?
 [Rollr](http://github.com/alxjrvs/rollr) was one of the first things I ever built. I think it's funny, and I'm not sure why.
 
-I recently had the privilege of attending Sandi Metz' POODNyc workshop, which involved a continual practice of refactoring the same "simple" problem over and over again.  I liked revisitng Rollr through the years, and Randsum reflects an attempt to use small refactoring techniques to continue to mull over the "simple" problem of random numbers.
+I liked revisitng Rollr through the years, and Randsum reflects my current take on the problem. I renamed it because at a certain point you realize you just typed `Rollr::Roll.new(rolls:).roll!`and you're just dead inside. 
 
 ## Development
 
