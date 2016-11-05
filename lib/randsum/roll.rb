@@ -1,6 +1,11 @@
+require 'pry'
 module Randsum
   class Roll
-    attr_reader :die, :quantity, :sides, :result
+    attr_reader :die, :quantity, :sides, :result, :total
+
+    alias_method :length, :quantity
+    alias_method :count, :quantity
+    alias_method :rolls, :result
 
     def initialize(die:, quantity:, result: nil)
       @die = die
@@ -10,8 +15,14 @@ module Randsum
     end
 
     def to_s
-      "Rolls: #{result}"
+      "You rolled #{count} #{die}, and got #{total}. (Rolls: #{result})"
     end
+    alias_method :inspect, :to_s
+
+    def total
+      @total ||= result.inject(:+)
+    end
+    alias_method :to_i, :total
 
     def drop(quantity:,extremity:)
       return new_roll_with(
@@ -23,7 +34,16 @@ module Randsum
       )
     end
 
+    def drop_lowest(quantity = 1)
+      drop(quantity: quantity, extremity: :lowest)
+    end
+
+    def drop_highest(quantity = 1)
+      drop(quantity: quantity, extremity: :highest)
+    end
+
     private
+
     def new_roll_with(result: nil)
       return Roll.new(
         die: die,

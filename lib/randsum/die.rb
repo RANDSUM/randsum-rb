@@ -11,8 +11,9 @@ module Randsum
     end
 
     def roll(quantity = 1)
-      Randsum::RollReport.new(
-        roll_for(quantity)
+      Randsum::Roll.new(
+        quantity: quantity,
+        die: self
       )
     end
 
@@ -23,15 +24,5 @@ module Randsum
     def simple_roll
       randomizer.random_number(sides).to_i + ZERO_INDEX_FIXER
     end
-
-    private
-
-    def roll_for(quantity)
-        Randsum::Roll.new(
-          quantity: quantity,
-          die: self
-        )
-    end
-
   end
 end

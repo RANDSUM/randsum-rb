@@ -6,10 +6,8 @@ require "randsum/filters/droppers/high_dropper"
 require "randsum/filters/droppers/low_dropper"
 require "randsum/roll"
 require "randsum/die"
-require "randsum/roll_report"
 
 module Randsum
-
   D2 = Die.new(2)
   D3 = Die.new(3)
   D4 = Die.new(4)

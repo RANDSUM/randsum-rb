@@ -31,8 +31,8 @@ describe Randsum::Die do
       expect(roll.to_i).to eq desired_result
     end
 
-    it  'it returns a Randsum::RollReport' do
-      expect(roll).to be_a Randsum::RollReport
+    it  'it returns a Randsum::Roll' do
+      expect(roll).to be_a Randsum::Roll
     end
   end
 end
