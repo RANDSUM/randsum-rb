@@ -22,7 +22,7 @@ module Randsum
     end
 
     def transform(match)
-      match.map { |r| value }
+      match.map { value }
     end
   end
 end
