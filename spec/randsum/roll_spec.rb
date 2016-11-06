@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe Randsum::Roll do
   let(:sides)    { 20 }
@@ -10,6 +11,64 @@ describe Randsum::Roll do
 
   let(:total) { rolls.inject(:+) }
   let(:inspect) {"You rolled #{rolls.count} #{die}, and got #{total}. (Rolls: #{result})"}
+
+  describe ".roll" do
+    let(:roll) { Randsum::Roll.roll(quantity, d: sides) }
+    it "returns a new Roll with the proper values" do
+      expect(roll.count).to eq quantity
+      expect(roll.sides).to eq sides
+    end
+  end
+
+  describe "beats?" do
+    describe "given a value less than the total" do
+      let(:check) { total - 1}
+
+      it "returns false" do
+        expect(roll.beats?(check)).to be true
+      end
+    end
+    describe "given a value greater than the total" do
+      let(:check) { total + 1}
+
+      it "returns true" do
+        expect(roll.beats?(check)).to be false
+      end
+    end
+
+    describe "given a value equal to the total" do
+      let(:check) { total }
+
+      it "returns false" do
+        expect(roll.beats?(check)).to be false
+      end
+    end
+  end
+
+  describe "meets?" do
+    describe "given a value less than the total" do
+      let(:check) { total - 1}
+
+      it "returns false" do
+        expect(roll.meets?(check)).to be true
+      end
+    end
+    describe "given a value greater than the total" do
+      let(:check) { total + 1}
+
+      it "returns true" do
+        expect(roll.meets?(check)).to be false
+      end
+    end
+
+    describe "given a value equal to the total" do
+      let(:check) { total }
+
+      it "returns true" do
+        expect(roll.meets?(check)).to be true
+      end
+    end
+  end
 
   describe "inspect" do
     it "returns the correctly formatted string" do
@@ -35,6 +94,85 @@ describe Randsum::Roll do
     end
   end
 
+
+  describe "replace logic" do
+    let(:rolls)  { [2, 2, 6, 5] }
+    let(:roll)   { Randsum::Roll.new(result: rolls, die: die, quantity: rolls.count) }
+
+    describe "#double" do
+      let(:doubled) { roll.double_all(2) }
+
+      it "doubles all instances of the target" do
+        expect(doubled.result).to match_array([4,4,6,5])
+      end
+    end
+
+    describe "#reroll" do
+      let(:reroll) { roll.reroll }
+
+      it "produces a new roll" do
+        expect(reroll).to_not eq roll
+      end
+    end
+
+    describe "#replace" do
+      let(:replace) { 20 }
+      let(:replaced) { roll.replace(target, with: replace) }
+
+      describe "given an integer target" do
+        let(:target)   { 2 }
+
+        it "replaces all matching values with the given integer" do
+          expect(replaced.result ).to match_array [20, 20, 6, 5]
+        end
+      end
+
+      describe "given a target of :all" do
+        let(:target) { :all }
+
+        it "replaces all values with the given integer" do
+          expect(replaced.result).to match_array([20,20,20,20])
+        end
+      end
+
+      describe "given a blank target" do
+        let(:target) { nil }
+
+        it "replaces all values with the given integer" do
+          expect(replaced.result).to match_array([20,20,20,20])
+        end
+      end
+
+      describe "given an integer with: value" do
+        let(:replace) { 20 }
+        let(:target)   { 2 }
+
+        it "replaces all matching values with the given integer" do
+          expect(replaced.result ).to match_array [20, 20, 6, 5]
+        end
+      end
+
+      describe "given a :double with: value" do
+        let(:replace) { :double }
+        let(:target)   { 2 }
+
+        it "replaces all matching values with the given integer" do
+          expect(replaced.result ).to match_array [4, 4, 6, 5]
+        end
+      end
+
+      describe "given a :reroll with: value" do
+        let(:replace) { :reroll }
+        let(:target)   { 2 }
+
+        it "returns a random roll" do
+          expect(replaced.result).to include 5
+          expect(replaced.result).to include 6
+          expect(replaced.result).to_not match_array rolls
+        end
+      end
+    end
+  end
   describe "drop logic" do
     let(:rolls)  { [2, 6, 5] }
     let(:roll)   { Randsum::Roll.new(result: rolls, die: die, quantity: 3) }
