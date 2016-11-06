@@ -1,7 +1,7 @@
 module Randsum
   class LowDropper < Dropper
     def ordered
-      rolls.sort { |a, b| b <=> a }
+      roll.result.sort { |a, b| b <=> a }
     end
   end
 end

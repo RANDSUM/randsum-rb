@@ -89,75 +89,166 @@ Snakeyes. Rough.
 `Die#roll` returns a `Roll` object, which can teach you a lot about your rolls (but not, tragically, how to roll better.)
 
 ```
-> report = Randsum::D20.roll 5
+> roll = Randsum::D20.roll 5
 #=> You rolled 5 d20, and got a 61. (Rolls: [20, 16, 9, 14, 1])
 ```
 
 The `#total` method represents the sum total of the dice that were rolled:
 
 ```
-> report.total
+> roll.total
 #=> 61
 ```
 
 The `#rolls` array, which reports the individual results of any dice rolled:
 
 ```
-> report.rolls
+> roll.rolls
 #=> [20, 17, 9, 14,1]
 ```
 
 `#quantity` tells you how many dice were rolled this time:
 
 ```
-> report.quantity
+> roll.quantity
 #=> 5
 ```
 
 `#sides` reports the number of sides on the dice rolled in this result:
 
 ```
-> report.sides
+> roll.sides
 #=> 20
 ```
 
 And if you don't like that roll (hey we get it) you can use `#die` to get another of the same die to roll again!
 
 ```
-> report.die.roll
+> roll.die.roll
 #=> You rolled 1 D20, and got 17. (Rolls: [17])
 ```
 
 #### Manipulating `Roll`s
 
-Roll results can be further manipulated after their original creation. To facilitate popular use-cases for Dice rolling, `Roll`s also include public `#drop_lowest` and `#drop_highest`, and `#drop` methods.
+`Roll`s can be directly created, using the `.roll` class method. Get ready to see the word `Roll` a lot below; its become meaningless to me at this point.
+
+```
+> Randsum::Roll.roll 2 d:20
+#=> You rolled 2 d20, and got 25. (Rolls: [12, 13])
+```
+
+
+##### Dropping Rolls
+`Roll`s also include public `#drop_lowest` and `#drop_highest`, and `#drop` methods.
 
 `#drop_lowest` returns a new `Roll` without the lowest numerical die roll.
 
 ```
-> report = Randsum::D6.roll 4
+> roll = Randsum::D6.roll 4
 #=> You rolled 4 d6, and got 11. (Rolls: [3, 2, 2, 4])
 
-> new_report = report.drop_lowest
-#=>  You rolled 3 d6, and got 9. (Rolls: [4, 3, 2])
+> roll.drop_lowest
+#=> You rolled 3 d6, and got 9. (Rolls: [4, 3, 2])
 ```
 
 Similarly, `#drop_highest` will remove the highest number in the `rolls` array.
 
 ```
-> new_result = report.drop_highest
+> new_roll = roll.drop_highest
 #=> You rolled 3 d6, and got 7. (Rolls: [2, 2, 3])
 ```
 
 Both `#drop_lowest` and `#drop_highest` can also take an optional integer argument.
 
 ```
-> result.drop_highest(2)
+> roll.drop_highest(2)
+#=> You rolled 2 d6, and got 4. (Rolls: [2, 2])
+```
+`#drop` works as a catch-all for these, using keyword arguments:
+
+```
+> roll.drop(extremity: :highest, quantity: 2)
 #=> You rolled 2 d6, and got 4. (Rolls: [2, 2])
 ```
 
-### WHY IS THIS SO COMPLICATED
+##### Replacing Values
+`Roll`s have a number of ways to further manipulate the rolls inside.
 
+```
+ > roll = Randsum::D20.roll(3)
+ #=> You rolled 3 d20, and got 35. (Rolls: [14, 12, 9])
+```
+
+You can use the `#reroll` to completely trash the rolls you had and start again.
+```
+ > roll.reroll
+ #=> You rolled 3 d20, and got 44. (Rolls: [19, 11, 14])
+```
+
+`#double_all` takes all instances of a value in the roll and - you guess it - doubles it.
+```
+ > roll.double_all(9)
+ #=> You rolled 3 d20, and got 44. (Rolls: [14, 12, 18])
+```
+
+The catch-all `#replace` method takes a number of arguments that change its behavior:
+  - the `target:` keyword can be:
+
+    - an integer (what you want to replace) or
+      ```
+       > roll.replace(target: 9, with: 20)
+       #=> You rolled 3 d20, and got 46. (Rolls: [14, 12, 20])
+      ```
+    - the symbol `:all` (to replace all of the rolls)
+      ```
+       > roll.replace(target: :all, with: 20)
+       #=> You rolled 3 d20, and got 60. (Rolls: [20, 20, 20])
+      ```
+
+  - the `with:` keyword:
+    - an integer (what you want the target to be replaced by)
+      ```
+       > roll.replace(target: 9, with: 20)
+       #=> You rolled 3 d20, and got 46. (Rolls: [14, 12, 20])
+      ```
+    - the symbol `:reroll` (to replace the targets with a new roll using the same die)
+      ```
+       > roll.replace(target: 9, with: :reroll)
+       #=> You rolled 3 d20, and got 28. (Rolls: [14, 12, 2])
+      ```
+    - the symbol `:double` (to double the value of the targets)
+      ```
+       > roll.replace(target: 9, with: :double)
+       #=> You rolled 3 d20, and got 44. (Rolls: [14, 12, 18])
+      ```
+
+#### Checking!
+Need to see if a value meet or beat another value? Well, beans. We've got that, too.
+
+```
+ > roll = Randsum::D20.roll(3)
+ #=> You rolled 3 d20, and got 22. (Rolls: [20, 1, 1])
+
+ > roll.beats?(20)
+ #=> true
+
+ > roll.beats?(22)
+ #=> false
+
+ > roll.beats?(25)
+ #=> false
+
+ > roll.meets?(20)
+ #=> true
+
+ > roll.meets?(22)
+ #=> true
+
+ > roll.meets?(25)
+ #=> false
+```
+
+### WHY IS THIS SO COMPLICATED
 `Die#simple_roll` will just give you a random number, but where's the fun in that?
 
 ### Why build this?
