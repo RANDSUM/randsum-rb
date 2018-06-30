@@ -1,4 +1,3 @@
-require 'pry'
 module Randsum
   class Roll
     attr_reader :die, :quantity, :sides, :result, :total
