@@ -40,15 +40,15 @@ module Randsum
 
     def replace(target, with:)
       Replacer.for(
-        target:,
-        with:,
+        target: target,
+        with: with,
         roll: self
       ).filter
     end
 
     def double_all(target)
       Replacer.for(
-        target:,
+        target: target,
         with: ReplacerValue::DOUBLE,
         roll: self
       ).filter
@@ -64,18 +64,18 @@ module Randsum
 
     def drop(quantity:, extremity:)
       Dropper.for(
-        quantity:,
-        extremity:,
+        quantity: quantity,
+        extremity: extremity,
         roll: self
       ).filter
     end
 
     def drop_lowest(quantity = 1)
-      drop(quantity:, extremity: :lowest)
+      drop(quantity: quantity, extremity: :lowest)
     end
 
     def drop_highest(quantity = 1)
-      drop(quantity:, extremity: :highest)
+      drop(quantity: quantity, extremity: :highest)
     end
 
     private

@@ -8,7 +8,7 @@ module Randsum
     def self.for(quantity:, extremity:, roll:)
       Object.const_get(
         "Randsum::#{extremity.to_s.gsub('est', '').capitalize}Dropper"
-      ).new(quantity:, roll:)
+      ).new(quantity: quantity, roll: roll)
     end
 
     def initialize(quantity:, roll:)
@@ -20,7 +20,7 @@ module Randsum
       Randsum::Roll.new(
         die: roll.die,
         quantity: roll.quantity,
-        result:
+        result: result
       )
     end
 

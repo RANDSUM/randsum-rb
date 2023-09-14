@@ -15,7 +15,7 @@ module Randsum
         ReplacerDoubleValue
       else
         ReplacerValue
-      end.new(value, roll:)
+      end.new(value, roll: roll)
     end
 
     def initialize(value, roll:)

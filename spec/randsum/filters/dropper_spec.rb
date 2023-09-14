@@ -4,8 +4,8 @@ require 'spec_helper'
 
 describe Randsum::Dropper do
   let(:die)     { Randsum::Die.new(1) }
-  let(:roll)    { Randsum::Roll.new(quantity: 0, die:, result: []) }
-  let(:dropper) { described_class.new(quantity: :foo, roll:) }
+  let(:roll)    { Randsum::Roll.new(quantity: 0, die: die, result: []) }
+  let(:dropper) { described_class.new(quantity: :foo, roll: roll) }
 
   describe '#ordered' do
     it 'raises a NotImplementedError' do

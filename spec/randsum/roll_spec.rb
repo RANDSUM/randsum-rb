@@ -8,7 +8,7 @@ describe Randsum::Roll do
   let(:quantity) { 4 }
   let(:result)   { [20, 19, 4, 12] }
   let(:rolls) { result }
-  let(:roll) { described_class.new(die:, quantity:, result:) }
+  let(:roll) { described_class.new(die: die, quantity: quantity, result: result) }
 
   let(:total) { rolls.inject(:+) }
   let(:inspect) { "You rolled #{rolls.count} #{die}, and got #{total}. (Rolls: #{result})" }
@@ -103,7 +103,7 @@ describe Randsum::Roll do
 
   describe 'replace logic' do
     let(:rolls)  { [2, 2, 6, 5] }
-    let(:roll)   { described_class.new(result: rolls, die:, quantity: rolls.count) }
+    let(:roll)   { described_class.new(result: rolls, die: die, quantity: rolls.count) }
 
     describe '#double' do
       let(:doubled) { roll.double_all(2) }
@@ -180,11 +180,11 @@ describe Randsum::Roll do
 
   describe 'drop logic' do
     let(:rolls)  { [2, 6, 5] }
-    let(:roll)   { described_class.new(result: rolls, die:, quantity: 3) }
+    let(:roll)   { described_class.new(result: rolls, die: die, quantity: 3) }
 
     describe '#drop' do
       let(:num) { 2 }
-      let(:dropped_result) { roll.drop(quantity: num, extremity:) }
+      let(:dropped_result) { roll.drop(quantity: num, extremity: extremity) }
 
       describe "given a 'lowest' extremity" do
         let(:extremity) { :lowest }

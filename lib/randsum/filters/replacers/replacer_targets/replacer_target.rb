@@ -13,7 +13,7 @@ module Randsum
         ReplacerTargetAll
       else
         ReplacerTarget
-      end.new(target, roll:)
+      end.new(target, roll: roll)
     end
 
     def initialize(target, roll:)

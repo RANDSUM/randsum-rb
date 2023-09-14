@@ -7,15 +7,15 @@ module Randsum
 
     def self.for(target:, with:, roll:)
       Randsum::Replacer.new(
-        target:,
-        with:,
-        roll:
+        target: target,
+        with: with,
+        roll: roll
       )
     end
 
     def initialize(target:, with:, roll:)
-      @target = ReplacerTarget.for(target, roll:)
-      @with   = ReplacerValue.for(with, roll:)
+      @target = ReplacerTarget.for(target, roll: roll)
+      @with   = ReplacerValue.for(with, roll: roll)
       @roll   = roll
     end
 
@@ -23,7 +23,7 @@ module Randsum
       Randsum::Roll.new(
         die: roll.die,
         quantity: roll.quantity,
-        result:
+        result: result
       )
     end
 

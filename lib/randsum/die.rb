@@ -15,7 +15,7 @@ module Randsum
 
     def roll(quantity = 1)
       Randsum::Roll.new(
-        quantity:,
+        quantity: quantity,
         die: self
       )
     end
