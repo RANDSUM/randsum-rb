@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Randsum
   class Roll
     attr_reader :die, :quantity, :sides, :result, :total
 
-    alias_method :length, :quantity
-    alias_method :count, :quantity
-    alias_method :rolls, :result
+    alias length quantity
+    alias count quantity
+    alias rolls result
 
     def self.roll(num, d:)
       new(die: Die.new(d), quantity: num)
@@ -20,12 +22,12 @@ module Randsum
     def to_s
       "You rolled #{count} #{die}, and got #{total}. (Rolls: #{result})"
     end
-    alias_method :inspect, :to_s
+    alias inspect to_s
 
     def total
       @total ||= result.inject(:+)
     end
-    alias_method :to_i, :total
+    alias to_i total
 
     def beats?(check_value)
       total > check_value
@@ -37,15 +39,15 @@ module Randsum
 
     def replace(target, with:)
       Replacer.for(
-        target: target,
-        with: with,
+        target:,
+        with:,
         roll: self
       ).filter
     end
 
     def double_all(target)
       Replacer.for(
-        target: target,
+        target:,
         with: ReplacerValue::DOUBLE,
         roll: self
       ).filter
@@ -59,20 +61,20 @@ module Randsum
       ).filter
     end
 
-    def drop(quantity:,extremity:)
+    def drop(quantity:, extremity:)
       Dropper.for(
-        quantity: quantity,
-        extremity: extremity,
+        quantity:,
+        extremity:,
         roll: self
       ).filter
     end
 
     def drop_lowest(quantity = 1)
-      drop(quantity: quantity, extremity: :lowest)
+      drop(quantity:, extremity: :lowest)
     end
 
     def drop_highest(quantity = 1)
-      drop(quantity: quantity, extremity: :highest)
+      drop(quantity:, extremity: :highest)
     end
 
     private

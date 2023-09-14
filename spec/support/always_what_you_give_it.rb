@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AlwaysWhatYouGiveIt
   ZERO_INDEX_FIXER = 1
   def self.random_number(result)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Randsum
   class ReplacerValue
     REROLL = :reroll
@@ -13,7 +15,7 @@ module Randsum
         ReplacerDoubleValue
       else
         ReplacerValue
-      end.new(value, roll: roll)
+      end.new(value, roll:)
     end
 
     def initialize(value, roll:)

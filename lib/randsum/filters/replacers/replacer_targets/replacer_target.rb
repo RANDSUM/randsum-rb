@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Randsum
   class ReplacerTarget
     ALL = :all
@@ -11,7 +13,7 @@ module Randsum
         ReplacerTargetAll
       else
         ReplacerTarget
-      end.new(target, roll: roll)
+      end.new(target, roll:)
     end
 
     def initialize(target, roll:)

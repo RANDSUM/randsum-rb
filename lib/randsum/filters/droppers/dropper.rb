@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Randsum
   class Dropper
     attr_reader :quantity, :roll
 
     def self.for(quantity:, extremity:, roll:)
       Object.const_get(
-        "Randsum::#{extremity.to_s.gsub("est","").capitalize}Dropper"
-      ).new(quantity: quantity, roll: roll)
+        "Randsum::#{extremity.to_s.gsub('est', '').capitalize}Dropper"
+      ).new(quantity:, roll:)
     end
 
     def initialize(quantity:, roll:)
@@ -14,10 +16,10 @@ module Randsum
     end
 
     def filter
-      return Randsum::Roll.new(
+      Randsum::Roll.new(
         die: roll.die,
         quantity: roll.quantity,
-        result: result
+        result:
       )
     end
 
