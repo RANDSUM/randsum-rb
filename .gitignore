@@ -1,9 +1,17 @@
-/.bundle/
-/.yardoc
-/Gemfile.lock
-/_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/tmp/
+# bundler
+.bundle
+Gemfile.lock
+Gemfile.local
+vendor/
+
+# RuboCop
+.rubocop
+
+# For vim:
+*.swp
+
+# For bundle binstubs
+bin/*
+
+# For stackprof or others
+tmp/*
