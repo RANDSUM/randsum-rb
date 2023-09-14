@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Randsum
+  # A Replacer replaces rolls with other rolls.
   class Replacer
     attr_reader :target, :with, :roll
 

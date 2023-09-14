@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Randsum
+  # A dropper is a base object for HighDropper and LowDropper. The Droppers filter high or low rolls from a set of rolls.
   class Dropper
     attr_reader :quantity, :roll
 

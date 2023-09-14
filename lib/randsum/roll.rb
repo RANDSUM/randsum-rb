@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Randsum
+  # A Roll controls a single instance of a set of Dice rolls
   class Roll
     attr_reader :die, :quantity, :sides, :result
 
@@ -8,8 +9,8 @@ module Randsum
     alias count quantity
     alias rolls result
 
-    def self.roll(num, d:)
-      new(die: Die.new(d), quantity: num)
+    def self.roll(num, die_sides:)
+      new(die: Die.new(die_sides), quantity: num)
     end
 
     def initialize(die:, quantity:, result: nil)
