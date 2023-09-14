@@ -14,3 +14,6 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rake
   - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7
