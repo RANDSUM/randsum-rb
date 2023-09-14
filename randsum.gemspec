@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
   spec.description   = Randsum::DESCRIPTION
   spec.homepage      = Randsum::HOMEPAGE
   spec.license       = Randsum::LICENSE
+  spec.required_ruby_version = '>= 3.2.0'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'

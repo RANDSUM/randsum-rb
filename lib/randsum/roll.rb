@@ -2,7 +2,7 @@
 
 module Randsum
   class Roll
-    attr_reader :die, :quantity, :sides, :result, :total
+    attr_reader :die, :quantity, :sides, :result
 
     alias length quantity
     alias count quantity
