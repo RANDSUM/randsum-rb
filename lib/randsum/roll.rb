@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module Randsum
+  # A Roll controls a single instance of a set of Dice rolls
   class Roll
-    attr_reader :die, :quantity, :sides, :result, :total
+    attr_reader :die, :quantity, :sides, :result
 
-    alias_method :length, :quantity
-    alias_method :count, :quantity
-    alias_method :rolls, :result
+    alias length quantity
+    alias count quantity
+    alias rolls result
 
-    def self.roll(num, d:)
-      new(die: Die.new(d), quantity: num)
+    def self.roll(num, die_sides:)
+      new(die: Die.new(die_sides), quantity: num)
     end
 
     def initialize(die:, quantity:, result: nil)
@@ -20,12 +23,12 @@ module Randsum
     def to_s
       "You rolled #{count} #{die}, and got #{total}. (Rolls: #{result})"
     end
-    alias_method :inspect, :to_s
+    alias inspect to_s
 
     def total
       @total ||= result.inject(:+)
     end
-    alias_method :to_i, :total
+    alias to_i total
 
     def beats?(check_value)
       total > check_value
@@ -59,7 +62,7 @@ module Randsum
       ).filter
     end
 
-    def drop(quantity:,extremity:)
+    def drop(quantity:, extremity:)
       Dropper.for(
         quantity: quantity,
         extremity: extremity,

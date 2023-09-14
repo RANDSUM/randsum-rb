@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module Randsum
+  # A dropper is a base object for HighDropper and LowDropper. The Droppers filter high or low rolls from a set of rolls.
   class Dropper
     attr_reader :quantity, :roll
 
     def self.for(quantity:, extremity:, roll:)
       Object.const_get(
-        "Randsum::#{extremity.to_s.gsub("est","").capitalize}Dropper"
+        "Randsum::#{extremity.to_s.gsub('est', '').capitalize}Dropper"
       ).new(quantity: quantity, roll: roll)
     end
 
@@ -14,7 +17,7 @@ module Randsum
     end
 
     def filter
-      return Randsum::Roll.new(
+      Randsum::Roll.new(
         die: roll.die,
         quantity: roll.quantity,
         result: result

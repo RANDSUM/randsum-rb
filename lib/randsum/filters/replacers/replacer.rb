@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Randsum
+  # A Replacer replaces rolls with other rolls.
   class Replacer
     attr_reader :target, :with, :roll
 
@@ -6,7 +9,7 @@ module Randsum
       Randsum::Replacer.new(
         target: target,
         with: with,
-        roll: roll,
+        roll: roll
       )
     end
 
@@ -17,7 +20,7 @@ module Randsum
     end
 
     def filter
-      return Randsum::Roll.new(
+      Randsum::Roll.new(
         die: roll.die,
         quantity: roll.quantity,
         result: result

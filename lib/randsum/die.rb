@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
 module Randsum
+  # A die is an object that can be `.roll`ed to produce a random number.
   class Die
     ZERO_INDEX_FIXER = 1
     attr_accessor :sides, :randomizer

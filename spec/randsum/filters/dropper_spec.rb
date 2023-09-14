@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Randsum::Dropper do
   let(:die)     { Randsum::Die.new(1) }
-  let(:roll)    { Randsum::Roll.new(quantity: 0, die: die, result: [])}
-  let(:dropper) { Randsum::Dropper.new(quantity: :foo, roll: roll) }
+  let(:roll)    { Randsum::Roll.new(quantity: 0, die: die, result: []) }
+  let(:dropper) { described_class.new(quantity: :foo, roll: roll) }
 
-  describe "#ordered" do
+  describe '#ordered' do
     it 'raises a NotImplementedError' do
-      expect{ dropper.ordered }.to raise_error NotImplementedError
+      expect { dropper.ordered }.to raise_error NotImplementedError
     end
   end
 
-  describe "#filter" do
+  describe '#filter' do
     it 'raises a NotImplementedError' do
-      expect{ dropper.filter }.to raise_error NotImplementedError
+      expect { dropper.filter }.to raise_error NotImplementedError
     end
   end
 end

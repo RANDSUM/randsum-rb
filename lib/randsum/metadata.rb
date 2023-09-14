@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Randsum
-  SUMMARY = "RNaaOOP"
-  DESCRIPTION = "Don't you hate it when you have to generate specific quantities of random numbers from a particular range while writing ruby?  Look no further. "
-  HOMEPAGE = "http://api.randsum.io"
-  LICENSE = "MIT"
+  SUMMARY = 'Ergonomic Dice Rolling with Ruby'
+  DESCRIPTION = 'A Dice roller, useful for generating rolls that you might use in popular Tabletop Role-playing Games.'
+  HOMEPAGE = 'https://github.com/RANDSUM/randsum-rb'
+  LICENSE = 'MIT'
 end
