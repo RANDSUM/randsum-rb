@@ -19,8 +19,8 @@ describe Randsum::Die do
       expect(roll.to_i).to eq desired_result
     end
 
-    it  'it returns a Fixnum' do
-      expect(roll).to be_a Fixnum
+    it  'it returns a Integer' do
+      expect(roll).to be_an Integer
     end
   end
 
