@@ -17,7 +17,7 @@ describe Randsum::Roll do
     let(:roll) { described_class.roll(quantity, die_sides: sides) }
 
     it 'returns a new Roll with the proper quantity' do
-      expect(roll.sides).to eq quantity
+      expect(roll.quantity).to eq quantity
     end
 
     it 'returns a new Roll with the proper sides' do
